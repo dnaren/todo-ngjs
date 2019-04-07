@@ -18,37 +18,31 @@
       href="styles/main.css"
     />
   </head>
-  <body ng-controller="homeController as vm">
+  <body>
     <div class="container">
-      <div class="form-row">
-        <div class="form-group col-sm-6">
-          <label for="firstName">
-            First Name
-          </label>
-          <input
-            id="firstName"
-            class="form-control form-control-sm"
-            type="text"
-            ng-model="vm.name.firstName"
-          />
+      <div ng-controller="homeController as vm">
+        <h3>Todo</h3>
+        <div
+          class="form-row"
+          ng-repeat="todo in vm.todos | filter : {'status' : false}"
+        >
+          <div class="form-group">
+            <input type="checkbox" ng-model="todo.status" />
+            <label>{{ todo.todoText }}</label>
+          </div>
         </div>
-        <div class="form-group col-sm-6">
-          <label for="lastName">
-            Last Name
-          </label>
-          <input
-            id="lastName"
-            class="form-control form-control-sm"
-            type="text"
-            ng-model="vm.name.lastName"
-          />
+        <h3>Completed</h3>
+        <div
+          class="form-row"
+          ng-repeat="todo in vm.todos | filter : {'status' : true}"
+        >
+          <div class="form-group">
+            <input type="checkbox" ng-model="todo.status" />
+            <del>{{ todo.todoText }}</del>
+          </div>
         </div>
-      </div>
-      <div class="form-row">
-        Hey {{ vm.name.firstName }} {{ vm.name.lastName }}
       </div>
     </div>
-
     <script
       src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"
       integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM"
